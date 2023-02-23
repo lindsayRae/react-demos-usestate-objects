@@ -1,6 +1,7 @@
 import './App.css';
 import { useState } from 'react';
 
+// Example #1
 function GoalForm(props) {
   const [formData, setFormData] = useState({ goal: '', by: '' });
 
@@ -19,7 +20,8 @@ function GoalForm(props) {
 
   return (
     <>
-      <h1>My Goals</h1>
+      <h1>Example #1</h1>
+      <h2>My Goals</h2>
       <form onSubmit={submitHandler}>
         <input
           type='text'
@@ -41,6 +43,7 @@ function GoalForm(props) {
   );
 }
 
+// Example #1
 function ListOfGoals(props) {
   return (
     <ul>
@@ -55,6 +58,41 @@ function ListOfGoals(props) {
   );
 }
 
+// Example #2
+function GiftCard() {
+  const [giftCard, setGiftCard] = useState({
+    firstName: 'Jennifer',
+    lastName: 'Smith',
+    text: 'Free dinner for 4 guests',
+    valid: true,
+    instructions: 'To use your coupon, click the button below.',
+  });
+
+  function spendGiftCard() {
+    setGiftCard((prevState) => {
+      return {
+        ...prevState,
+        text: 'Your coupon has been used.',
+        valid: false,
+        instructions: ' Please visit our restaurant to renew your gift card.',
+      };
+    });
+  }
+  return (
+    <div>
+      <h1>Example #2</h1>
+      <h2>Gift Card</h2>
+      <p>
+        Customer: {giftCard.firstName} {giftCard.lastName}
+      </p>
+      <p>{giftCard.text}</p>
+      <p>{giftCard.instructions}</p>
+      {giftCard.valid && (
+        <button onClick={spendGiftCard}>Spend Gift Card</button>
+      )}
+    </div>
+  );
+}
 export default function App() {
   const [allGoals, updateAllGoals] = useState([]);
 
@@ -64,8 +102,12 @@ export default function App() {
 
   return (
     <div className='App'>
-      <GoalForm onAdd={addGoal}></GoalForm>
-      <ListOfGoals allGoals={allGoals}></ListOfGoals>
+      <div>
+        <GoalForm onAdd={addGoal}></GoalForm>
+        <ListOfGoals allGoals={allGoals}></ListOfGoals>
+      </div>
+
+      <GiftCard></GiftCard>
     </div>
   );
 }
